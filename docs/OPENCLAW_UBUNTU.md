@@ -90,6 +90,34 @@ openclaw onboard --auth-choice openai-api-key --install-daemon
 
 Informe segredos e tokens apenas nos prompts locais. Não os salve neste repositório, não os envie em chat e não os coloque em arquivos versionados.
 
+### Se você respondeu `no` à configuração do provedor
+
+Essa escolha não desfaz a instalação: o Gateway continua ativo, mas não há um modelo configurado para o agente responder. É exatamente o caso da mensagem `No usable model provider is configured`.
+
+No prompt interativo que aparece após essa mensagem, digite:
+
+```text
+configure model provider
+```
+
+Quando o assistente perguntar se deseja configurar um provedor, responda `yes`. Em seguida, escolha **OpenAI API Key** e cole a chave de API do projeto OpenAI apenas no prompt da VM. Repita o processo em cada VM que de fato precisará fazer chamadas ao modelo.
+
+Como alternativa, pressione `Ctrl + C` para sair do modo interativo e execute:
+
+```bash
+openclaw onboard --auth-choice openai-api-key
+```
+
+Depois da autenticação, confirme e selecione um modelo disponível:
+
+```bash
+openclaw models list --provider openai
+openclaw models set openai/ID_DO_MODELO
+openclaw models status
+```
+
+Se as duas VMs forem usadas para cenários diferentes, prefira criar chaves de projeto distintas ou, no mínimo, registrar claramente qual VM usa cada chave. Nunca coloque a chave no `.env` deste repositório.
+
 No Ubuntu, esse comando instala normalmente um serviço `systemd` de usuário. Confira o estado:
 
 ```bash
