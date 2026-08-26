@@ -1,0 +1,47 @@
+// Perfil de agente separado ("lab-test") para o primeiro cenário observacional.
+// Não altera o agente principal/cotidiano (id real: "crestodian", ver OPS-015 —
+// "main" era só um apelido genérico usado nos documentos até esse ponto).
+//
+// Campos confirmados contra o schema real da versão instalada (2026.7.1-2),
+// via `openclaw config schema` + inspeção manual — ver REGISTRO_OPERACIONAL_V1.md,
+// OPS-012/013/014. A estrutura correta é `agents.list` (array, cada item exige
+// "id"), NÃO `agents.entries`/`agents.entries.<id>` como um rascunho anterior supôs.
+//
+// Fluxo (ver REGISTRO_OPERACIONAL_V1.md, OPS-013/014):
+//   1) openclaw config patch --file ./PATCH_DE_TESTE.json5 --dry-run
+//   2) revisar o resultado do dry-run
+//   3) openclaw config patch --file ./PATCH_DE_TESTE.json5   (aplica de verdade)
+// Aplicado com sucesso em OPS-014. Falta ainda a política de execução
+// (tools.exec/aprovações) do agente "lab-test", que não é definida por este
+// arquivo — ver seção "Próxima alteração planejada" do registro operacional.
+{
+  agents: {
+    list: [
+      {
+        id: "lab-test",
+        // Ajustar para um diretório já criado no servidor, contendo apenas
+        // arquivos sintéticos (ver F0/F3 do plano de trabalho).
+        workspace: "/home/SUBSTITUIR/lab/test-workspace",
+        identity: {
+          name: "lab-test",
+        },
+        sandbox: {
+          mode: "all", // off | non-main | all
+          backend: "docker",
+          workspaceAccess: "ro", // none | ro | rw
+          scope: "session", // session | agent | shared
+          docker: {
+            image: "openclaw-sandbox:bookworm-slim",
+            network: "none",
+            readOnlyRoot: true,
+            capDrop: ["ALL"],
+          },
+        },
+        tools: {
+          profile: "minimal", // minimal | coding | messaging | full
+          deny: ["shell", "write", "browser", "messaging", "mcp"],
+        },
+      },
+    ],
+  },
+}

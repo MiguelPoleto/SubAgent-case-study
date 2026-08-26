@@ -4,7 +4,7 @@
 
 ## 1. Finalidade
 
-Concentrar as especificações verificadas do laboratório e os resultados dos experimentos da frente Miguel. O documento complementa o [plano de trabalho](Miguel-V1.md): o plano define o que e como investigar; este registro descreve o ambiente utilizado e o que foi efetivamente observado.
+Concentrar as especificações verificadas do laboratório e os resultados dos experimentos da frente Miguel. O documento complementa o [plano de trabalho](../planejamento/Miguel-V1.md): o plano define o que e como investigar; este registro descreve o ambiente utilizado e o que foi efetivamente observado.
 
 ## 2. Ambiente de referência
 
@@ -31,13 +31,13 @@ O requisito de isolamento para esta fase será atendido por escopo operacional: 
 
 ## 3. Papéis operacionais
 
-| Papel | VM | Uso previsto |
-| --- | --- | --- |
-| Cliente | VM cliente | Operação, coleta/consulta de logs e apoio aos cenários sintéticos. |
-| Servidor de testes | VM servidor | Execução dos cenários e principal ambiente com configuração de modelos para pesquisa. |
-| Ator adversarial | Papel lógico do cenário | Representado por conteúdo, instrução ou serviço sintético autorizado; não corresponde a uma máquina ou pessoa externa. |
+| Papel | VM | Uso previsto | Estado de configuração atual |
+| --- | --- | --- | --- |
+| Cliente | VM cliente | Operação, coleta/consulta de logs e apoio aos cenários sintéticos. | Apenas OpenClaw instalado (versão de referência confirmada em OPS-004). Sem modelos configurados, sem sandbox Docker, sem patch de teste. Não é alvo de nenhuma alteração de configuração nesta fase. |
+| Servidor de testes | VM servidor | Execução dos cenários e principal ambiente com configuração de modelos para pesquisa. | OpenClaw instalado e configurado com os modelos da seção 4; imagem de sandbox `openclaw-sandbox:bookworm-slim` construída e validada (OPS-011 em [replicações](../replicacoes/REGISTRO_OPERACIONAL_V1.md)). É o único alvo do patch de perfil de teste em andamento. |
+| Ator adversarial | Papel lógico do cenário | Representado por conteúdo, instrução ou serviço sintético autorizado; não corresponde a uma máquina ou pessoa externa. | Não se aplica. |
 
-Embora OpenClaw esteja disponível nas duas VMs, mudanças de modelos e experimentos que dependam da configuração atual devem começar pelo servidor de testes. O uso do OpenClaw no cliente será registrado quando fizer parte de um cenário.
+Embora OpenClaw esteja disponível nas duas VMs, **toda a configuração de modelos, sandbox e o perfil de teste (`agents.entries.lab-test`) acontece somente no servidor de testes.** O cliente segue sem alteração até que um cenário específico exija seu uso; o uso do OpenClaw no cliente será registrado quando isso ocorrer.
 
 ### Destinos autorizados
 
@@ -163,6 +163,6 @@ Decisão e próximo passo:
 
 ## Referências internas
 
-- [Plano de trabalho da frente Miguel](Miguel-V1.md)
-- [Registro operacional](REGISTRO_OPERACIONAL_V1.md)
+- [Plano de trabalho da frente Miguel](../planejamento/Miguel-V1.md)
+- [Registro operacional (replicações)](../replicacoes/REGISTRO_OPERACIONAL_V1.md)
 - [Planejamento geral do projeto](../../../planning/PROJECT_PLAN_V1.md)
