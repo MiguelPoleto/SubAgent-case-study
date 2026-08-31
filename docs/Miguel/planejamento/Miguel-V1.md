@@ -8,10 +8,6 @@ Esta frente de trabalho busca transformar o tema amplo de segurança em agentes 
 
 O resultado não será apenas uma lista de riscos. Cada conclusão deverá estar associada a uma hipótese, uma configuração reproduzível, evidências minimizadas e uma decisão técnica registrada. Sempre que um controle for implementado ou proposto, ele será comparado a um comportamento de referência para permitir avaliar benefício, custo operacional e limitações.
 
-### Possível tema de TCC (candidato, não fechado)
-
-Miguel está considerando direcionar seu TCC para algo na linha de **"autorização zero-trust de ferramentas em agentes autônomos de IA: redução de superfície de ataque"** — o que corresponde à direção **D3** do plano geral ([planning/PROJECT_PLAN_V1.md](../../../planning/PROJECT_PLAN_V1.md)). Ainda não é o tema exato/fechado, mas a frente de trabalho já vem produzindo evidência prática nessa direção: o agente de teste `lab-test` (sandbox restritivo, `tools.deny`, e a política de execução em investigação — ver [REGISTRO_OPERACIONAL_V1.md](../replicacoes/REGISTRO_OPERACIONAL_V1.md)) é, na prática, uma primeira implementação candidata de uma camada de autorização determinística entre a intenção do modelo e a execução da ferramenta. Se esse tema for confirmado, as fases F2–F4 deste plano (ameaças de autorização de ferramentas, baseline permissivo medido, e o controle D3 propriamente dito) tendem a se tornar o núcleo experimental do TCC.
-
 ## 2. Escopo desta frente
 
 ### Incluído
