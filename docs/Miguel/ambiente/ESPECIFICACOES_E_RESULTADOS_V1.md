@@ -13,7 +13,8 @@ Concentrar as especificações verificadas do laboratório e os resultados dos e
 | VM cliente | Ubuntu Server 22.04.5 LTS (`jammy`) | Confirmado |
 | VM servidor | Ubuntu Server 22.04.5 LTS (`jammy`) | Confirmado |
 | Virtualização | KVM, virtualização completa | Confirmado |
-| OpenClaw | Disponível nas duas VMs, versão 2026.7.1-2 (build `0790d9f`) | Confirmado |
+| OpenClaw — cliente | Versão 2026.7.1-2 (build `0790d9f`) | Confirmado em OPS-004; não reconfirmado desde então |
+| OpenClaw — servidor | Atualizado para 2026.8.2 em 2026-09-02 (era 2026.7.1-2) — ver [REGISTRO_OPERACIONAL_V1.md](../replicacoes/REGISTRO_OPERACIONAL_V1.md), OPS-018 a OPS-021 | Confirmado |
 | CPU por VM | 4 vCPUs x86_64 (QEMU Virtual CPU) | Confirmado |
 | Memória por VM | Aproximadamente 3,8 GiB de RAM e 3,8 GiB de swap | Confirmado |
 | Disco por VM | Disco virtual de 50 GB, partição raiz ext4 | Confirmado |
@@ -21,7 +22,7 @@ Concentrar as especificações verificadas do laboratório e os resultados dos e
 | Espaço disponível — servidor | Aproximadamente 34 GB na partição raiz no inventário inicial | Confirmado |
 | Rede | Sub-rede acadêmica compartilhada, com comunicação entre VMs e acesso externo necessário às APIs; não é exclusiva do projeto | Confirmado |
 | Firewall local | UFW inativo nas duas VMs no inventário inicial | Confirmado |
-| Snapshot/backup operacional | Não será utilizado nesta fase | Decisão registrada |
+| Snapshot/backup operacional | Sem snapshot de VM. Primeiro backup verificado do servidor (`openclaw backup create --verify`) feito antes da atualização 2026.8.2 (OPS-018) | Decisão revisada: usar backup do próprio OpenClaw antes de mudanças de maior risco (ex.: atualização de versão), mesmo sem snapshot de VM |
 
 Os rótulos **cliente** e **servidor** são funcionais. Eles não devem ser substituídos na documentação por nomes de host, usuários, IPs ou outros identificadores do ambiente.
 
@@ -64,6 +65,12 @@ O acesso aos provedores é considerado um pré-requisito operacional do ambiente
 Quando houver comparação entre o modelo principal e uma alternativa, devem permanecer constantes, sempre que possível: versão do OpenClaw, cenário sintético, ferramentas habilitadas, permissões, política defensiva, número de repetições e critério de sucesso. A troca de modelo deve ser registrada como uma variável experimental, não como uma conclusão de segurança por si só.
 
 Cada resultado deve informar qual modelo foi usado, sem registrar conta, credencial ou identificador de sessão.
+
+### Comparação entre versões do OpenClaw (ideia registrada, ainda não usada)
+
+O mesmo princípio vale para versão do OpenClaw: ela também pode ser tratada como variável experimental, não só como algo a manter fixo. O CLI suporta isso diretamente — `openclaw update --tag <versão>` aceita uma versão específica (inclusive uma anterior à instalada; o próprio `--help` confirma que downgrade é suportado, com aviso de que "pode quebrar configuração"). Antes de qualquer downgrade, criar backup verificado (`openclaw backup create --verify`).
+
+Uso possível: rodar o mesmo cenário sintético em duas versões do OpenClaw (ex.: a linha 2026.7.x anterior ao "OpenClaw 2.0" e uma versão 2026.8.x), mantendo cenário, modelo, permissões e critério de sucesso constantes, pra comparar se o comportamento de segurança mudou entre versões — por exemplo, mudanças de default relatadas em changelogs (como `sessionToolsVisibility` ou comportamento "fail-closed" do sandbox em releases mais recentes) são candidatas naturais a esse tipo de comparação. Ainda não foi usado nenhum experimento assim; fica registrado aqui como possibilidade a explorar.
 
 ## 6. Inventário sanitizado inicial
 
@@ -109,7 +116,7 @@ O resultado de `plugins list` recebido foi truncado no compartilhamento. Por iss
 
 ### Política efetiva e isolamento de execução
 
-As duas VMs possuem a mesma configuração efetiva, conforme validação do laboratório. O agente principal opera diretamente no host, com sandbox desativado e sem containers de sandbox em execução. Embora o backend Docker esteja disponível, ele não está sendo aplicado ao agente no estado atual.
+No inventário inicial (F0), as duas VMs tinham a mesma configuração efetiva para o agente principal (id real `crestodian`, ver REGISTRO_OPERACIONAL_V1.md OPS-015): opera diretamente no host, com sandbox desativado e sem containers de sandbox em execução. Isso continua valendo para o `crestodian` depois da atualização do servidor (OPS-018 a OPS-021 não alteraram sua política). A simetria entre as VMs, porém, não é mais garantida desde então: o **servidor** também tem o agente de teste `lab-test` (sandbox restritivo, ver seção 6) e está em OpenClaw 2026.8.2, enquanto o **cliente** permanece só com a instalação padrão em 2026.7.1-2.
 
 | Controle | Estado confirmado | Consequência |
 | --- | --- | --- |

@@ -26,7 +26,9 @@ O resultado não será apenas uma lista de riscos. Cada conclusão deverá estar
 
 ## 3. Estado inicial conhecido
 
-O laboratório possui duas VMs Ubuntu Server 22.04.5 LTS virtualizadas por KVM. OpenClaw está disponível nas duas, e a VM de servidor de testes possui OpenClaw **2026.7.1-2** (build `0790d9f`) com a configuração de modelo de referência. A instalação possui um modelo principal baseado em OpenAI e também modelos configurados de OpenAI e OpenRouter, incluindo uma opção de modelo de raciocínio e um modelo alternativo gratuito.
+O laboratório possui duas VMs Ubuntu Server 22.04.5 LTS virtualizadas por KVM. OpenClaw estava disponível nas duas, e a VM de servidor de testes possuía OpenClaw **2026.7.1-2** (build `0790d9f`) com a configuração de modelo de referência. A instalação possui um modelo principal baseado em OpenAI e também modelos configurados de OpenAI e OpenRouter, incluindo uma opção de modelo de raciocínio e um modelo alternativo gratuito.
+
+> **Atualização (2026-09-02):** o servidor de testes foi atualizado para OpenClaw **2026.8.2** (o "OpenClaw 2.0") antes do início de qualquer experimento registrado. O cliente permanece em 2026.7.1-2. Detalhes, achados da migração e um incidente de consentimento de plugin não lido: [REGISTRO_OPERACIONAL_V1.md](../replicacoes/REGISTRO_OPERACIONAL_V1.md), OPS-018 a OPS-021. Estado de ambiente atualizado em [ESPECIFICACOES_E_RESULTADOS_V1.md](../ambiente/ESPECIFICACOES_E_RESULTADOS_V1.md).
 
 No estado registrado, não há fallback de execução ativado. Assim, o modelo alternativo configura uma possibilidade de teste ou de futura contingência, mas não deve ser tratado como fallback automático até que isso seja configurado e validado. A autenticação do provedor principal está operacional segundo o diagnóstico local; detalhes de perfil, conta, saldo, validade de sessão, caminhos de banco de dados e qualquer segredo são deliberadamente omitidos deste documento.
 

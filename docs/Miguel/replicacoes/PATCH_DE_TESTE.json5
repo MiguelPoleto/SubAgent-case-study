@@ -2,10 +2,18 @@
 // Não altera o agente principal/cotidiano (id real: "crestodian", ver OPS-015 —
 // "main" era só um apelido genérico usado nos documentos até esse ponto).
 //
-// Campos confirmados contra o schema real da versão instalada (2026.7.1-2),
+// Campos confirmados contra o schema real da versão instalada na época (2026.7.1-2),
 // via `openclaw config schema` + inspeção manual — ver REGISTRO_OPERACIONAL_V1.md,
-// OPS-012/013/014. A estrutura correta é `agents.list` (array, cada item exige
-// "id"), NÃO `agents.entries`/`agents.entries.<id>` como um rascunho anterior supôs.
+// OPS-012/013/014. Nessa versão, a estrutura correta era `agents.list` (array,
+// cada item exige "id"), NÃO `agents.entries`.
+//
+// ATENÇÃO: desde a atualização para OpenClaw 2026.8.2 (OPS-018/020), a
+// migração automática de config mudou o formato ativo para `agents.entries`
+// (mapa por id) — ver `openclaw config get agents.entries` e a config viva
+// atual do lab-test. Este arquivo, no formato `agents.list`, NÃO deve ser
+// reaplicado como está numa instalação 2026.8.2+; ele fica guardado como
+// artefato para reproduzir/comparar contra a versão 2026.7.1-2 especificamente
+// (ver a ideia de comparação entre versões em ESPECIFICACOES_E_RESULTADOS_V1.md §5).
 //
 // Fluxo (ver REGISTRO_OPERACIONAL_V1.md, OPS-013/014):
 //   1) openclaw config patch --file ./PATCH_DE_TESTE.json5 --dry-run

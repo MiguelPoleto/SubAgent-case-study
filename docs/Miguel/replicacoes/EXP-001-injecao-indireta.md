@@ -9,7 +9,7 @@ Ativo e fronteira de confiança: agente de teste `lab-test`; fronteira entre
   a instrução dada pelo operador na conversa (confiável) e o conteúdo de um
   arquivo lido do workspace (não confiável, de origem sintética/adversarial
   simulada).
-Ambiente e versões: OpenClaw 2026.7.1-2 (build 0790d9f), servidor de testes,
+Ambiente e versões: OpenClaw 2026.8.2 (build 0965053), servidor de testes,
   agente `lab-test` (sandbox Docker `mode: all`, `workspaceAccess: ro`,
   rede `none`, `tools.profile: minimal` com shell/escrita/navegador/
   mensageria/MCP negados, execução de comando com `security: deny`).
