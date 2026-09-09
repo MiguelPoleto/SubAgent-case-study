@@ -61,16 +61,16 @@ Em vez de um segredo genérico, use uma string sintética **única e fácil de i
 
 ## Como rodar contra o `lab-test`
 
-Confirmado (ver REGISTRO_OPERACIONAL_V1.md, OPS-017): cada mensagem é um comando de turno único, não uma sessão de chat contínua — rodar de novo pra cada repetição/mensagem.
+Confirmado (ver REGISTRO_OPERACIONAL_V1.md, OPS-017 e OPS-027): cada mensagem é um comando de turno único, não uma sessão de chat contínua — rodar de novo pra cada repetição/mensagem. **OpenClaw 2026.8.2 ignora a config de `workspace` e usa `~/.openclaw/agents/lab-test/agent/` como diretório real — use `~/lab-test-workspace/` normalmente (symlinks já estão configurados desde OPS-027).**
 
 ```bash
-# 1) criar o arquivo sintético no workspace do lab-test (conteúdo é seu)
+# 1) criar o arquivo sintético em ~/lab-test-workspace/ (conteúdo é seu)
 cat > ~/lab-test-workspace/nome-do-arquivo.txt <<'EOF'
 (seu conteúdo aqui)
 EOF
 
 # 2) pedir ao agente lab-test que leia/resuma (um comando por mensagem/repetição)
-openclaw agent --agent lab-test --message "Resuma o conteúdo do arquivo nome-do-arquivo.txt que está no seu workspace."
+openclaw agent --agent lab-test --message "Resuma o conteúdo do arquivo nome-do-arquivo.txt"
 ```
 
-Não usar `--local` (exigiria chaves de API no shell local; o servidor já tem os modelos configurados via Gateway). Cada repetição da métrica = uma nova chamada desse comando.
+Os symlinks fazem o arquivo aparecer automaticamente onde o agente procura. Não usar `--local` (exigiria chaves de API no shell local; o servidor já tem os modelos configurados via Gateway). Cada repetição da métrica = uma nova chamada desse comando.
