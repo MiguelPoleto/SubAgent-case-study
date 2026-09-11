@@ -154,6 +154,27 @@ Score: 7.5 (HIGH)
 
 ---
 
+## Formal Reproduction Tests (September 11, 2026)
+
+### Test Matrix: Authorization Precedence
+
+All tests conducted on OpenClaw 2026.8.2 with sandbox `workspaceAccess: "rw"`.
+
+| Test ID | Configuration | Expected | Observed | Result |
+|---------|---|---|---|---|
+| OPS-030 | `profile: "minimal"` + `deny: ["write"]` only | Blocks write | Blocks / empty file | ✓ PASS |
+| OPS-031 | `profile: "minimal"` + `alsoAllow: ["group:fs"]` only | Allows write | File created with content | ✓ PASS |
+| OPS-032 | `profile: "minimal"` + `alsoAllow: ["group:fs"]` + `deny: ["write", ...]` | Blocks write | **File created with content** | ✗ **BUG CONFIRMED** |
+| OPS-033 | `profile: "minimal"` + `alsoAllow: ["group:fs"]` + `deny: ["write"]` only | Blocks write | **File created with content** | ✗ **BUG CONFIRMED** |
+
+### Reproducibility
+- **100% consistent** across all test runs
+- **Not masked by deny alone** — deny blocks when alsoAllow absent
+- **Triggered exclusively by alsoAllow** — removing alsoAllow restores deny functionality
+- **Reproducible with group:fs** — the group:fs implicit write access overrides explicit deny
+
+---
+
 ## Mitigation (Temporary)
 
 **Until OpenClaw releases a fix:**
@@ -214,12 +235,14 @@ func TestDenyOverridesAlsoAllow(t *testing.T) {
 
 ## Discovery Timeline
 
-| Date | Event |
-| --- | --- |
-| 2026-09-09 | Bug discovered during lab-test agent configuration (OPS-028) |
-| 2026-09-09 | Root cause identified: precedence order (OPS-029) |
-| 2026-09-09 | Reported to OpenClaw via responsible disclosure |
-| TBD | OpenClaw response / fix released |
+| Date | Event | Reference |
+| --- | --- | --- |
+| 2026-09-09 | Bug discovered during lab-test agent configuration | OPS-028 |
+| 2026-09-09 | Root cause identified: precedence order | OPS-029 |
+| 2026-09-11 | Bug reproduced with 4-test confirmation protocol | OPS-030 to OPS-033 |
+| 2026-09-11 | Reproduction fully documented and verified 100% consistent | REPORT-BUG-REPRODUCAO |
+| TBD | Report submitted to OpenClaw via responsible disclosure | — |
+| TBD | OpenClaw response / fix released | — |
 
 ---
 
