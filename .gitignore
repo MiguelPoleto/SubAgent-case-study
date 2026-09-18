@@ -1,1 +1,3 @@
 .env
+testbed/openclaw/.env
+testbed/openclaw/runtime/

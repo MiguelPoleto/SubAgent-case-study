@@ -24,6 +24,7 @@ Os tutoriais ficam em `docs/`, para manter a raiz do repositório focada no READ
 
 - [tmux + SSH para as VMs (macOS e Linux)](docs/TMUX.md)
 - [instalação e configuração do OpenClaw em Ubuntu Server](docs/OPENCLAW_UBUNTU.md)
+- [testbed Docker isolado do OpenClaw](docs/Alessandro/Alessandro-V1.md)
 
 ## Ambiente de VMs
 
