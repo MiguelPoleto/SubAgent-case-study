@@ -16,27 +16,28 @@ O objetivo é produzir conhecimento e artefatos reproduzíveis para compreender 
 - delegação, isolamento e limites de confiança entre agentes e subagentes;
 - avaliação de mecanismos defensivos.
 
-O plano de trabalho vivo, derivado da proposta submetida e livre de obrigações administrativas ou cronograma fixo, está em [planning/PROJECT_PLAN_V1.md](planning/PROJECT_PLAN_V1.md).
+O plano de trabalho da pesquisa está em [docs/experiments/sbsi2027/plano-de-trabalho.md](docs/experiments/sbsi2027/plano-de-trabalho.md).
 
 ## Documentação
 
 Os tutoriais ficam em `docs/`, para manter a raiz do repositório focada no README:
 
-- [tmux + SSH para as VMs (macOS e Linux)](docs/Tutorials/TMUX.md)
-- [instalação e configuração do OpenClaw em Ubuntu Server](docs/Tutorials/OPENCLAW_UBUNTU.md)
-- [testbed SBSI 2027 — injeção indireta de prompt](docs/Alessandro/README.md)
+- [documentação](docs/README.md)
+- [tmux + SSH para as VMs (macOS e Linux)](docs/tutorials/tmux-ssh.md)
+- [instalação e configuração do OpenClaw em Ubuntu Server](docs/tutorials/openclaw-ubuntu.md)
+- [testbed SBSI 2027 — injeção indireta de prompt](docs/experiments/sbsi2027/README.md)
 
 ## Ambiente de VMs
 
-O script [vms.sh](vms.sh) abre uma sessão `tmux` com duas conexões SSH lado a lado: uma VM cliente e uma VM servidor. As variáveis de conexão devem ficar no arquivo local `.env`, que não deve ser versionado.
+O script [scripts/vms.sh](scripts/vms.sh) abre uma sessão `tmux` com duas conexões SSH lado a lado: uma VM cliente e uma VM servidor. As variáveis de conexão devem ficar no arquivo local `.env`, que não deve ser versionado.
 
-O tutorial completo está em [docs/Tutorials/TMUX.md](docs/Tutorials/TMUX.md).
+O tutorial completo está em [docs/tutorials/tmux-ssh.md](docs/tutorials/tmux-ssh.md).
 
 Uso rápido:
 
 ```bash
-chmod +x vms.sh
-./vms.sh
+chmod +x scripts/vms.sh
+./scripts/vms.sh
 ```
 
 ## Equipe

@@ -1,6 +1,6 @@
 # Testbed SBSI 2027 — injeção indireta de prompt
 
-Esta implementação executa o [plano do experimento](../plano/Plano_de_Experimento_OpenClaw2_SBSI2027.md). Há duas VMs descartáveis: a VM 1 entrega vetores sintéticos; a VM 2 executa os dois cenários comparáveis com o mesmo agente e o mesmo conjunto de dados.
+Esta implementação executa o [plano do experimento](plano-do-experimento.md). Há duas VMs descartáveis: a VM 1 entrega vetores sintéticos; a VM 2 executa os dois cenários comparáveis com o mesmo agente e o mesmo conjunto de dados.
 
 ```text
 VM 1: NGINX + Mailpit (conteúdo e e-mails sintéticos)

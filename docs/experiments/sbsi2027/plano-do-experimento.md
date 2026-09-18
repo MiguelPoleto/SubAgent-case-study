@@ -32,7 +32,7 @@ Todos os artefatos, documentos e mensagens devem ser sintéticos. A VM 1 e a VM 
 - `testbed/sbsi2027/vm2-agente-alvo/profiles/scenario-a-host.json5`: condição A.
 - `testbed/sbsi2027/vm2-agente-alvo/profiles/scenario-b-sandbox.json5`: condição B.
 - `testbed/sbsi2027/vm2-agente-alvo/scripts/apply-ufw.sh`: modelo de firewall da VM 2.
-- [TESTBED_SBSI2027.md](../ambiente/TESTBED_SBSI2027.md): procedimento operacional.
+- [ambiente.md](ambiente.md): procedimento operacional.
 
 ## Hipóteses e métricas
 
