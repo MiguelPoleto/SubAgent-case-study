@@ -22,15 +22,15 @@ O plano de trabalho vivo, derivado da proposta submetida e livre de obrigações
 
 Os tutoriais ficam em `docs/`, para manter a raiz do repositório focada no README:
 
-- [tmux + SSH para as VMs (macOS e Linux)](docs/TMUX.md)
-- [instalação e configuração do OpenClaw em Ubuntu Server](docs/OPENCLAW_UBUNTU.md)
-- [testbed Docker isolado do OpenClaw](docs/Alessandro/Alessandro-V1.md)
+- [tmux + SSH para as VMs (macOS e Linux)](docs/Tutorials/TMUX.md)
+- [instalação e configuração do OpenClaw em Ubuntu Server](docs/Tutorials/OPENCLAW_UBUNTU.md)
+- [testbed SBSI 2027 — injeção indireta de prompt](docs/Alessandro/README.md)
 
 ## Ambiente de VMs
 
 O script [vms.sh](vms.sh) abre uma sessão `tmux` com duas conexões SSH lado a lado: uma VM cliente e uma VM servidor. As variáveis de conexão devem ficar no arquivo local `.env`, que não deve ser versionado.
 
-O tutorial completo está em [docs/TMUX.md](docs/TMUX.md).
+O tutorial completo está em [docs/Tutorials/TMUX.md](docs/Tutorials/TMUX.md).
 
 Uso rápido:
 

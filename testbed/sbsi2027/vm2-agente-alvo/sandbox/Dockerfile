@@ -1,13 +1,13 @@
-FROM debian:bookworm-slim
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-      bash ca-certificates curl git jq python3 ripgrep \
+      bash ca-certificates coreutils curl jq python3 ripgrep \
     && rm -rf /var/lib/apt/lists/* \
     && useradd --uid 1000 --create-home --shell /bin/bash sandbox
 
 USER sandbox
-WORKDIR /home/sandbox
+WORKDIR /workspace
 CMD ["sleep", "infinity"]

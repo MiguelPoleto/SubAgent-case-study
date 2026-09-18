@@ -1,0 +1,30 @@
+name: sbsi2027-synthetic-services
+
+services:
+  web-sintetico:
+    image: ${NGINX_IMAGE:?Defina NGINX_IMAGE com tag/digest validado em .env}
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: [/var/cache/nginx, /var/run]
+    ports:
+      - "${VM1_BIND_ADDR:-0.0.0.0}:${WEB_PORT:-8080}:8080"
+    volumes:
+      - ./runtime/site:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks: [synthetic]
+
+  mailpit:
+    image: ${MAILPIT_IMAGE:?Defina MAILPIT_IMAGE com tag/digest validado em .env}
+    restart: unless-stopped
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    ports:
+      - "${VM1_BIND_ADDR:-0.0.0.0}:${SMTP_PORT:-1025}:1025"
+      - "${VM1_BIND_ADDR:-0.0.0.0}:${MAILPIT_UI_PORT:-8025}:8025"
+    networks: [synthetic]
+
+networks:
+  synthetic:
+    internal: true

@@ -1,3 +1,6 @@
 .env
-testbed/openclaw/.env
-testbed/openclaw/runtime/
+testbed/sbsi2027/vm1-servicos-sinteticos/.env
+testbed/sbsi2027/vm1-servicos-sinteticos/runtime/mail/
+testbed/sbsi2027/vm1-servicos-sinteticos/runtime/results/
+testbed/sbsi2027/vm2-agente-alvo/dataset/
+testbed/sbsi2027/vm2-agente-alvo/results/
