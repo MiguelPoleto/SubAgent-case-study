@@ -6,10 +6,13 @@ services:
     restart: unless-stopped
     read_only: true
     cap_drop: [ALL]
+    cap_add: [CHOWN, SETUID, SETGID]
     security_opt: [no-new-privileges:true]
-    tmpfs: [/var/cache/nginx, /var/run]
+    tmpfs:
+      - /var/cache/nginx:rw,nosuid,nodev,noexec,mode=1777
+      - /run:rw,nosuid,nodev,noexec,mode=1777
     ports:
-      - "${VM1_BIND_ADDR:-0.0.0.0}:${WEB_PORT:-8080}:8080"
+      - "${WEB_PORT:-8080}:8080"
     volumes:
       - ./runtime/site:/usr/share/nginx/html:ro
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
@@ -21,10 +24,10 @@ services:
     cap_drop: [ALL]
     security_opt: [no-new-privileges:true]
     ports:
-      - "${VM1_BIND_ADDR:-0.0.0.0}:${SMTP_PORT:-1025}:1025"
-      - "${VM1_BIND_ADDR:-0.0.0.0}:${MAILPIT_UI_PORT:-8025}:8025"
+      - "${SMTP_PORT:-1025}:1025"
+      - "${MAILPIT_UI_PORT:-8025}:8025"
     networks: [synthetic]
 
 networks:
   synthetic:
-    internal: true
+    internal: false
