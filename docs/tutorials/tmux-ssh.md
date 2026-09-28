@@ -5,7 +5,7 @@ Este tutorial mostra como abrir e administrar, em um único terminal, duas conex
 Ao final, basta executar:
 
 ```bash
-./vms.sh
+./scripts/vms.sh
 ```
 
 O script abre uma sessão `tmux` chamada `vms`, com as conexões lado a lado:
@@ -19,7 +19,7 @@ O script abre uma sessão `tmux` chamada `vms`, com as conexões lado a lado:
 └──────────────────────────┴──────────────────────────┘
 ```
 
-O mesmo arquivo `vms.sh` é usado nos dois sistemas; não é necessário um script específico para Linux.
+O mesmo arquivo `scripts/vms.sh` é usado nos dois sistemas; não é necessário um script específico para Linux.
 
 ---
 
@@ -157,13 +157,13 @@ ssh SERVER_USER@SERVER_IP
 Na primeira vez, dê permissão de execução:
 
 ```bash
-chmod +x vms.sh
+chmod +x scripts/vms.sh
 ```
 
 Depois, inicie as duas VMs no tmux:
 
 ```bash
-./vms.sh
+./scripts/vms.sh
 ```
 
 Se a sessão `vms` já existir, o script apenas se reconecta a ela. Funciona da mesma forma no macOS e no Linux.
@@ -190,7 +190,7 @@ Para sair definitivamente de uma VM, execute `exit` no painel correspondente. Pa
 
 **`tmux: command not found`**: instale o tmux conforme a seção 2 e abra um novo terminal.
 
-**`Erro: arquivo .env não encontrado.`**: crie o `.env` na mesma pasta que o `vms.sh` e preencha as quatro variáveis.
+**`Erro: arquivo .env não encontrado.`**: crie o `.env` na raiz do projeto, ao lado da pasta `scripts`, e preencha as quatro variáveis.
 
 **A conexão pede senha ou é recusada**: teste o comando `ssh` manualmente; confirme usuário, IP, conectividade de rede e a configuração da chave pública na VM.
 

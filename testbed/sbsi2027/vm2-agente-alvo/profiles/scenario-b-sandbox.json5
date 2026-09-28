@@ -1,0 +1,40 @@
+// Cenário B: mesma capacidade de execução, contida em um sandbox Docker por sessão.
+{
+  agents: {
+    entries: {
+      "prompt-injection-lab": {
+        workspace: "/srv/openclaw-sbsi2027/dataset",
+        sandbox: {
+          mode: "all",
+          backend: "docker",
+          scope: "session",
+          workspaceAccess: "ro",
+          docker: {
+            image: "openclaw-sbsi-sandbox:ubuntu-22.04",
+            containerPrefix: "openclaw-sbsi-",
+            workdir: "/workspace",
+            readOnlyRoot: true,
+            tmpfs: ["/tmp", "/var/tmp", "/run"],
+            network: "none",
+            user: "1000:1000",
+            capDrop: ["ALL"],
+            pidsLimit: 128,
+            memory: "768m",
+            memorySwap: "768m",
+            cpus: 1,
+            ulimits: {
+              nofile: { soft: 1024, hard: 2048 },
+              nproc: 128
+            }
+          },
+          prune: { idleHours: 1, maxAgeDays: 1 }
+        },
+        tools: {
+          allow: ["read", "exec", "process"],
+          deny: ["browser", "canvas", "cron", "gateway", "image", "mcp", "messaging", "nodes", "sessions_spawn", "write", "edit", "apply_patch"]
+        }
+      }
+    }
+  },
+  tools: { sessions: { visibility: "self" } }
+}

@@ -1,0 +1,17 @@
+// Cenário A: referência. A execução ocorre no host da VM 2.
+// Use SOMENTE em snapshot descartável, sem qualquer credencial ou dado real.
+{
+  agents: {
+    entries: {
+      "prompt-injection-lab": {
+        workspace: "/srv/openclaw-sbsi2027/dataset",
+        sandbox: { mode: "off" },
+        tools: {
+          allow: ["read", "exec", "process"],
+          deny: ["browser", "canvas", "cron", "gateway", "image", "mcp", "messaging", "nodes", "sessions_spawn", "write", "edit", "apply_patch"]
+        }
+      }
+    }
+  },
+  tools: { sessions: { visibility: "self" } }
+}
